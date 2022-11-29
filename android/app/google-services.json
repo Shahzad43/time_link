@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "975986925105",
+    "project_id": "timelink-196b2",
+    "storage_bucket": "timelink-196b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975986925105:android:6b844f93b9c7c642ffff10",
+        "android_client_info": {
+          "package_name": "com.example.time_link"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975986925105-nkdovtjvb27kblurvu649udm8bg193ur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPOSRjSx0jUp3MXscu02rVR-zuJ4Y65EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975986925105-nkdovtjvb27kblurvu649udm8bg193ur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
