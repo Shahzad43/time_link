@@ -7,7 +7,7 @@ import 'package:time_link/Home%20Module/View/View%20Model/View/map_screen.dart';
 import 'package:time_link/Home%20Module/View/View%20Model/View/update_profile_screen.dart';
 import 'package:time_link/utils/custom_appbar.dart';
 import 'package:get/get.dart';
-
+import 'package:get/get.dart';
 
 class profileScreen extends StatefulWidget {
   profileScreen({Key? key}) : super(key: key);
