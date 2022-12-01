@@ -5,7 +5,7 @@ import 'package:time_link/utils/custom_container.dart';
 import 'package:delayed_display/delayed_display.dart';
 
 class onboardScreen1 extends StatelessWidget {
-  final Duration initialDelay = Duration(seconds: 1);
+  final Duration initialDelay = Duration(milliseconds: 100);
   onboardScreen1({Key? key}) : super(key: key);
 
   @override
@@ -31,22 +31,28 @@ class onboardScreen1 extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Container(
-                    width: screenWidth,
-                    height: screenHeight * 0.22,
-                    decoration: BoxDecoration(
-                        // color: Colors.black,
-                        image: DecorationImage(
-                      image: AssetImage("assets/onboard_timelink.png"),
-                    )),
+                  DelayedDisplay(
+                    delay: Duration(milliseconds: initialDelay.inMilliseconds + 700),
+                    child: Container(
+                      width: screenWidth,
+                      height: screenHeight * 0.22,
+                      decoration: BoxDecoration(
+                          // color: Colors.black,
+                          image: DecorationImage(
+                        image: AssetImage("assets/onboard_timelink.png"),
+                      )),
+                    ),
                   ),
-                  Container(
-                    height: screenHeight * 0.4,
-                    decoration: BoxDecoration(
-                        // color: Colors.black,
-                        image: DecorationImage(
-                            image: AssetImage("assets/onboard_frame.png"),
-                            fit: BoxFit.contain)),
+                  DelayedDisplay(
+                    delay: Duration(milliseconds: initialDelay.inMilliseconds + 1100),
+                    child: Container(
+                      height: screenHeight * 0.4,
+                      decoration: BoxDecoration(
+                          // color: Colors.black,
+                          image: DecorationImage(
+                              image: AssetImage("assets/onboard_frame.png"),
+                              fit: BoxFit.contain)),
+                    ),
                   ),
                 ],
               )
@@ -67,7 +73,7 @@ class onboardScreen1 extends StatelessWidget {
             height: screenHeight * 0.01,
           ),
           DelayedDisplay(
-            delay: Duration(seconds: initialDelay.inSeconds + 1),
+            delay: Duration(milliseconds: initialDelay.inMilliseconds + 1800),
             child: Text("Hey, time saver",
                 style: GoogleFonts.rubik(
                     color: Color(0xff65A6E7),
@@ -79,7 +85,7 @@ class onboardScreen1 extends StatelessWidget {
             height: screenHeight * 0.01,
           ),
           DelayedDisplay(
-            delay: Duration(seconds: initialDelay.inSeconds + 2),
+            delay: Duration(milliseconds: initialDelay.inMilliseconds + 2200),
             child: Text("Welcome to time link",
                 style: GoogleFonts.rubik(
                     color: Color(0xff686868),
@@ -91,7 +97,7 @@ class onboardScreen1 extends StatelessWidget {
             height: screenHeight * 0.02,
           ),
           DelayedDisplay(
-            delay: Duration(seconds: initialDelay.inSeconds + 3),
+            delay: Duration(milliseconds: initialDelay.inMilliseconds + 2600),
             child: CustomContainer(
               callback: () {
                 Navigator.of(context).push(

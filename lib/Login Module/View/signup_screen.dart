@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:time_link/Dashboard%20Module/View/dashboard_screen.dart';
 import 'package:time_link/Order%20Module/View/active_orders.dart';
 import 'package:time_link/Login%20Module/View/login_screen.dart';
+import 'package:time_link/Services/UserModel/signup_controller.dart';
 import 'package:time_link/utils/custom_appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:time_link/utils/custom_container.dart';
 import 'package:time_link/utils/custom_textbox.dart';
 import 'package:get/get.dart';
 
-class signupScreen extends StatelessWidget {
-  const signupScreen({Key? key}) : super(key: key);
+class signupScreen extends StatelessWidget{
+   signupScreen({Key? key}) : super(key: key);
 
+final controller = Get.put(SignUp());
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -55,6 +57,7 @@ class signupScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Bussiness name",
+                textEditingController: controller.bussinessNameController.value,
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -77,6 +80,7 @@ class signupScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Write your name",
+                textEditingController: controller.usernameController.value,
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -100,6 +104,8 @@ class signupScreen extends StatelessWidget {
               customTextbox(
                 text: "Password",
                 isPassword: true,
+                textEditingController: controller.passwordController.value,
+
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -123,6 +129,8 @@ class signupScreen extends StatelessWidget {
               customTextbox(
                 text: "Comfirm password",
                 isPassword: true,
+                textEditingController: controller.confirmPasswordController.value,
+
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -144,7 +152,9 @@ class signupScreen extends StatelessWidget {
                 height: screenHeight * 0.01,
               ),
               customTextbox(
-                text: "Write your number",
+                text: "Write your Bussiness Phone number",
+                textEditingController: controller.bussinesphonenoController.value,
+
 
               ),
               SizedBox(
@@ -167,7 +177,9 @@ class signupScreen extends StatelessWidget {
                 height: screenHeight * 0.01,
               ),
               customTextbox(
-                text: "Write your number",
+                text: "Write your personal Phone number",
+                textEditingController: controller.personalphoenoController.value,
+
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -190,6 +202,8 @@ class signupScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Write your email address",
+                textEditingController: controller.emailController.value,
+
               ),
               SizedBox(height: screenHeight*0.04,),
               Row(
@@ -210,13 +224,35 @@ class signupScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Write your ABN/ACN",
+                textEditingController: controller.abnacnController.value,
               ),
               SizedBox(height: screenHeight*0.045,),
               Container(
                 padding: EdgeInsets.only(left: 5,right: 5),
                 child: CustomContainer(callback: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => dashboardScreen()));
+                  // Get.to(()=> )
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => dashboardScreen()));
+
+                  if(controller.bussinessNameController.value.text.isEmpty || controller.personalphoenoController.value.text.isEmpty
+                      || controller.abnacnController.value.text.isEmpty
+                  || controller.emailController.value.text.isEmpty ||
+                      controller.passwordController.value.text.isEmpty ||
+                      controller.usernameController.value.text.isEmpty ||
+                      controller.bussinesphonenoController.value.text.isEmpty
+                  )
+                    {
+                      Get.snackbar("Error", "Please fill all Fields",backgroundColor: Colors.black38,colorText: Colors.white,snackPosition: SnackPosition.TOP);
+                    }
+                  else {
+                    if(controller.passwordController.value.text !=controller.confirmPasswordController.value.text){
+                      Get.snackbar("Error", "Password not match",backgroundColor: Colors.black38,colorText: Colors.white,snackPosition: SnackPosition.TOP);
+
+                    }else{
+                      controller.onSignup();
+                    }
+
+                  }
                 },
                   title: "Sign Up",
                   width: screenWidth,

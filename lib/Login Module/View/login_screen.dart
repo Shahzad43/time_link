@@ -20,6 +20,7 @@ class loginScreen extends StatefulWidget {
 class _loginScreenState extends State<loginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
   @override
   void dispose(){
     emailController.dispose();
@@ -33,7 +34,7 @@ class _loginScreenState extends State<loginScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Color(0xffF5FAFF),
-        body: SingleChildScrollView(
+        body: isLoading?Center(child: CircularProgressIndicator(),): SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.only(right: 29, left: 26),
         width: screenWidth,
@@ -171,12 +172,14 @@ class _loginScreenState extends State<loginScreen> {
     // password: passwordController.text.trim(),
     // );
 if(emailController.text.isEmpty|| passwordController.text.isEmpty){
-  Get.snackbar("Error", "Please fill out all fioelds.",backgroundColor: Colors.red);
+  Get.snackbar("Error", "Please fill all fields.",backgroundColor: Colors.black38,colorText: Colors.white,snackPosition: SnackPosition.TOP);
   return;
 }
     print(emailController.text);
     print(passwordController.text);
-
+setState(() {
+  isLoading = true;
+});
     try {
       UserCredential user =
       await FirebaseAuth.instance.signInWithEmailAndPassword(email:
@@ -189,10 +192,14 @@ if(emailController.text.isEmpty|| passwordController.text.isEmpty){
         print("Username or password is wrong");
       }
       else{
-        Get.to(dashboardScreen());
+        Get.to(()=>dashboardScreen());
       }
     }catch(e){
       print("\n "+e.toString()+"\n");
+      Get.snackbar("Error", "Email or Password is Incorrect",backgroundColor: Colors.black38,colorText: Colors.white,snackPosition: SnackPosition.TOP);
+      setState(() {
+        isLoading = false;
+      });
     }
 
   }

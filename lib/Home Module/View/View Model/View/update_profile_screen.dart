@@ -3,13 +3,16 @@ import 'package:time_link/Dashboard%20Module/View/dashboard_screen.dart';
 import 'package:time_link/Order%20Module/View/active_orders.dart';
 import 'package:time_link/Home%20Module/View/profile_screen.dart';
 import 'package:time_link/Login%20Module/View/login_screen.dart';
+import 'package:time_link/Services/UserModel/signup_controller.dart';
 import 'package:time_link/utils/custom_appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:time_link/utils/custom_container.dart';
+import 'package:get/get.dart';
 import 'package:time_link/utils/custom_textbox.dart';
 
 class updateprofileScreen extends StatelessWidget {
-  const updateprofileScreen({Key? key}) : super(key: key);
+   updateprofileScreen({Key? key}) : super(key: key);
+  final controller = Get.put(SignUp());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class updateprofileScreen extends StatelessWidget {
         // bottomOpacity: 0,
         elevation: 0,
         flexibleSpace: customAppbar(
-
+          text: "Update",
         ),
       ),
       body: SingleChildScrollView(
@@ -82,6 +85,7 @@ class updateprofileScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Bussiness name",
+                textEditingController: controller.bussinessNameController.value,
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -104,6 +108,7 @@ class updateprofileScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Write your name",
+                textEditingController: controller.usernameController.value,
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -127,6 +132,7 @@ class updateprofileScreen extends StatelessWidget {
               customTextbox(
                 text: "Password",
                 isPassword: true,
+                textEditingController: controller.passwordController.value,
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -150,6 +156,8 @@ class updateprofileScreen extends StatelessWidget {
               customTextbox(
                 text: "Comfirm password",
                 isPassword: true,
+                textEditingController: controller.confirmPasswordController.value,
+
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -171,8 +179,8 @@ class updateprofileScreen extends StatelessWidget {
                 height: screenHeight * 0.01,
               ),
               customTextbox(
-                text: "Write your number",
-
+                text: "Write your Bussiness Phone no",
+                textEditingController: controller.bussinesphonenoController.value,
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -194,7 +202,9 @@ class updateprofileScreen extends StatelessWidget {
                 height: screenHeight * 0.01,
               ),
               customTextbox(
-                text: "Write your number",
+                text: "Write your Personal Phone no",
+                textEditingController: controller.personalphoenoController.value,
+
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -217,6 +227,7 @@ class updateprofileScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Write your email address",
+                textEditingController: controller.emailController.value,
               ),
               SizedBox(height: screenHeight*0.04,),
               Row(
@@ -237,13 +248,34 @@ class updateprofileScreen extends StatelessWidget {
               ),
               customTextbox(
                 text: "Write your ABN/ACN",
+                textEditingController: controller.abnacnController.value,
               ),
               SizedBox(height: screenHeight*0.045,),
               Container(
                 padding: EdgeInsets.only(left: 5,right: 5),
                 child: CustomContainer(callback: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => dashboardScreen()));
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => dashboardScreen()));
+                  if(controller.bussinessNameController.value.text.isEmpty || controller.personalphoenoController.value.text.isEmpty
+                      || controller.abnacnController.value.text.isEmpty
+                      || controller.emailController.value.text.isEmpty ||
+                      controller.passwordController.value.text.isEmpty ||
+                      controller.usernameController.value.text.isEmpty ||
+                      controller.bussinesphonenoController.value.text.isEmpty
+                  )
+                  {
+                    Get.snackbar("Error", "Please fill all Fields",backgroundColor: Colors.black38,colorText: Colors.white,snackPosition: SnackPosition.TOP);
+                  }
+                  else {
+                    if(controller.passwordController.value.text !=controller.confirmPasswordController.value.text){
+                      Get.snackbar("Error", "Password not match",backgroundColor: Colors.black38,colorText: Colors.white,snackPosition: SnackPosition.TOP);
+
+                    }else{
+                      controller.onUpdate();
+                    }
+
+                  }
+
                 },
                   title: "Update",
                   width: screenWidth*0.6,
